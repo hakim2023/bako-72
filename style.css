@@ -148,7 +148,7 @@ em { font-style: italic; font-weight: 400; color: var(--terra); }
 .apps { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
 .app { padding: .65rem 1.1rem; border-radius: 10px; font-weight: 600; font-size: .95rem; transition: transform .2s; }
 .app:hover { transform: translateY(-2px); }
-.app--uber { background: #000; color: #fff; }
+.app--guru { background: var(--green); color: var(--cream); }
 .app--deliveroo { background: #00ccbc; color: #fff; }
 @media (min-width: 860px) { .order { grid-template-columns: repeat(3, 1fr); } }
 
