@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Bako-72 — Restaurant africain fait maison à Saint-Denis</title>
+  <meta name="description" content="Bako-72, restaurant familial de cuisine africaine traditionnelle faite maison, sans alcool, à Saint-Denis. Thièb, maffé, yassa, attiéké, poisson braisé. Sur place, à emporter et en livraison." />
+  <meta name="theme-color" content="#173a26" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:title" content="Bako-72 — Cuisine africaine faite maison" />
+  <meta property="og:description" content="Restaurant familial sans alcool à Saint-Denis. Sur place, à emporter, livraison. Ouvert 7j/7." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Bako-72",
+    "servesCuisine": "Africaine",
+    "telephone": "+33779081915",
+    "address": { "@type": "PostalAddress", "streetAddress": "6 rue Gaston Philipe", "postalCode": "93200", "addressLocality": "Saint-Denis", "addressCountry": "FR" },
+    "priceRange": "€",
+    "acceptsReservations": "True"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap topbar__in">
+      <span>Ouvert 7j/7</span><span class="dot"></span><span>Fait maison</span><span class="dot"></span><span>Sans alcool</span>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="wrap header__in">
+      <a href="#accueil" class="logo" aria-label="Bako-72, accueil">
+        <span class="logo__name">BAKO-72</span>
+        <span class="logo__sub">Restaurant</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Navigation principale">
+        <a href="#carte">La carte</a>
+        <a href="#commander">Commander</a>
+        <a href="#infos">Infos pratiques</a>
+        <a href="menu.html">Menu à imprimer</a>
+      </nav>
+      <a href="tel:+33779081915" class="btn btn--green header__cta">Réserver</a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav"><i></i><i></i></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Accueil ===== -->
+    <section class="hero" id="accueil">
+      <div class="wrap hero__in">
+        <div class="hero__text">
+          <p class="eyebrow">Restaurant familial · Saint-Denis</p>
+          <h1>La cuisine africaine <em>comme à la maison.</em></h1>
+          <p class="lead">Des recettes traditionnelles d'Afrique de l'Ouest, préparées chaque jour dans notre cuisine. Thièb, maffé, yassa, attiéké, poisson braisé&nbsp;: venez goûter.</p>
+          <div class="hero__cta">
+            <a href="#carte" class="btn btn--green btn--lg">Découvrir la carte</a>
+            <a href="tel:+33779081915" class="btn btn--line btn--lg">Réserver une table</a>
+          </div>
+          <ul class="modes">
+            <li><b>Sur place</b></li>
+            <li><b>À emporter</b></li>
+            <li><b>Livraison</b></li>
+          </ul>
+        </div>
+
+        <div class="hero__art" aria-hidden="true">
+          <div class="plate">
+            <div class="plate__ring"></div>
+            <div class="plate__inner">
+              <span class="plate__tag">Plat signature</span>
+              <strong>Thièb</strong>
+              <span class="plate__desc">Riz cassé, légumes,<br />poulet ou bœuf</span>
+              <span class="plate__price">12 €</span>
+            </div>
+          </div>
+          <div class="sticker">Authentic<br /><b>African</b><br />Cuisine</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="band" aria-hidden="true"></div>
+
+    <!-- ===== Chiffres clés ===== -->
+    <section class="highlights">
+      <div class="wrap highlights__in">
+        <div><b>100%</b><span>fait maison</span></div>
+        <div><b>7j/7</b><span>ouvert toute la semaine</span></div>
+        <div><b>12 €</b><span>le plat, à partir de</span></div>
+        <div><b>0</b><span>alcool : restaurant familial</span></div>
+      </div>
+    </section>
+
+    <!-- ===== Carte ===== -->
+    <section class="section" id="carte">
+      <div class="wrap">
+        <header class="head head--center">
+          <p class="eyebrow">La carte</p>
+          <h2>Nos plats <em>faits maison</em></h2>
+          <p class="sub">Toutes nos préparations sont cuisinées sur place, à partir de produits frais.</p>
+        </header>
+
+        <div class="tabs" role="tablist" id="tabs"></div>
+        <div class="menu" id="menu"></div>
+
+        <p class="menu__note">Allergènes : certains plats contiennent de l'arachide, du poisson ou des crustacés. N'hésitez pas à demander à notre équipe.</p>
+        <p class="center"><a href="menu.html" class="btn btn--line">Voir le menu à imprimer</a></p>
+      </div>
+    </section>
+
+    <!-- ===== Commander ===== -->
+    <section class="section section--green" id="commander">
+      <div class="wrap">
+        <header class="head head--center">
+          <p class="eyebrow eyebrow--light">Commander</p>
+          <h2>Sur place, à emporter <em>ou livré chez vous</em></h2>
+        </header>
+        <div class="order">
+          <article class="order__card">
+            <span class="order__num">01</span>
+            <h3>Sur place</h3>
+            <p>Installez-vous en famille ou entre amis dans une ambiance chaleureuse.</p>
+            <a href="tel:+33779081915" class="link">Réserver une table →</a>
+          </article>
+          <article class="order__card">
+            <span class="order__num">02</span>
+            <h3>À emporter</h3>
+            <p>Appelez pour commander, votre plat est prêt quand vous arrivez.</p>
+            <a href="tel:+33980830314" class="link">09 80 83 03 14 →</a>
+          </article>
+          <article class="order__card order__card--accent">
+            <span class="order__num">03</span>
+            <h3>Livraison</h3>
+            <p>Retrouvez-nous sur vos applications de livraison préférées.</p>
+            <div class="apps">
+              <a href="https://www.ubereats.com/fr/search?q=Bako-72" target="_blank" rel="noopener" class="app app--uber">Uber Eats</a>
+              <a href="https://deliveroo.fr/fr/" target="_blank" rel="noopener" class="app app--deliveroo">Deliveroo</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Infos ===== -->
+    <section class="section" id="infos">
+      <div class="wrap infos">
+        <div class="infos__text">
+          <p class="eyebrow">Infos pratiques</p>
+          <h2>Venez nous <em>rendre visite</em></h2>
+          <dl class="facts">
+            <div><dt>Adresse</dt><dd>6 rue Gaston Philipe<br />93200 Saint-Denis</dd></div>
+            <div><dt>Ouverture</dt><dd>Du lundi au dimanche</dd></div>
+            <div><dt>Réservations</dt><dd><a href="tel:+33779081915">07 79 08 19 15</a><br /><a href="tel:+33980830314">09 80 83 03 14</a></dd></div>
+          </dl>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=6+rue+Gaston+Philipe+93200+Saint-Denis" target="_blank" rel="noopener" class="btn btn--green">Itinéraire</a>
+        </div>
+        <div class="map">
+          <iframe title="Plan d'accès Bako-72" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=6+rue+Gaston+Philipe,+93200+Saint-Denis&output=embed"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="band band--thin" aria-hidden="true"></div>
+    <div class="wrap footer__in">
+      <div class="logo logo--light"><span class="logo__name">BAKO-72</span><span class="logo__sub">Restaurant</span></div>
+      <p>Cuisine africaine traditionnelle, faite maison.<br />Restaurant familial sans alcool.</p>
+      <p>6 rue Gaston Philipe, 93200 Saint-Denis<br /><a href="tel:+33779081915">07 79 08 19 15</a> · <a href="tel:+33980830314">09 80 83 03 14</a></p>
+    </div>
+    <div class="wrap footer__bottom">
+      <span>© <span id="year"></span> Bako-72 Restaurant</span>
+      <a href="https://hakim2023.github.io/" target="_blank" rel="noopener">Site réalisé par Fix &amp; Web</a>
+    </div>
+  </footer>
+
+  <div class="mobilebar">
+    <a href="tel:+33779081915" class="btn btn--green">Appeler</a>
+    <a href="#carte" class="btn btn--cream">La carte</a>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
