@@ -52,7 +52,7 @@ em { font-style: italic; font-weight: 400; color: var(--terra); }
 .header__in { display: flex; align-items: center; gap: 2rem; min-height: 72px; }
 .logo { display: grid; line-height: 1; margin-right: auto; }
 .logo--mark { display: flex; align-items: center; gap: .7rem; }
-.logo__icon { width: 36px; height: 45px; flex: none; filter: drop-shadow(0 4px 8px rgba(23, 58, 38, .25)); }
+.logo__icon { width: 44px; height: 44px; flex: none; filter: drop-shadow(0 4px 8px rgba(23, 58, 38, .25)); }
 .logo__txt { display: grid; gap: .3rem; }
 .logo--mark .logo__name { font: 600 1.45rem/1 var(--serif); letter-spacing: .04em; }
 .logo--mark .logo__sub { font: 600 .6rem/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--terra); padding-left: 0; margin: 0; }
@@ -96,12 +96,12 @@ em { font-style: italic; font-weight: 400; color: var(--terra); }
 .hero__art::before { content: ''; position: absolute; inset: -6%; border-radius: 50%; background: radial-gradient(closest-side, rgba(227, 161, 59, .28), rgba(227, 161, 59, 0)); }
 
 /* 3D medallion */
-/* arch shape matching logo.svg (160x200, 12px bottom corners) */
-.hero__art { --arch: 50% 50% 7.5% 7.5% / 40% 40% 6% 6%; }
-.coin { position: absolute; inset: 4% 14%; transform-style: preserve-3d; }
-.coin__float { position: absolute; inset: 0; transform-style: preserve-3d; animation: float 5s ease-in-out infinite; }
+/* round emblem matching logo.svg */
+.hero__art { --arch: 50%; }
+.coin { position: absolute; inset: 7%; transform-style: preserve-3d; }
+.coin__float { position: absolute; inset: 0; transform-style: preserve-3d; animation: float 8s ease-in-out infinite; }
 /* rotation is set every frame by main.js; this is the resting pose before JS runs */
-.coin__body { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(8deg) rotateY(-32deg); will-change: transform; }
+.coin__body { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(6deg) rotateY(-14deg); will-change: transform; }
 .coin__face { position: absolute; inset: 0; border-radius: var(--arch); overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .coin__face svg { width: 100%; height: 100%; display: block; }
 .coin__face--front { transform: translateZ(calc(var(--depth, 1px) * 9.5)); }
@@ -111,13 +111,12 @@ em { font-style: italic; font-weight: 400; color: var(--terra); }
   .hero__art { perspective: 600px; --depth: 1.6px; }
 }
 /* glossy light sweep */
-.coin__face::after { content: ''; position: absolute; inset: 0; border-radius: var(--arch); background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, .22) 45%, transparent 60%); background-size: 250% 100%; animation: shine 9s ease-in-out infinite; mix-blend-mode: screen; }
+.coin__face::after { content: ''; position: absolute; inset: 0; border-radius: var(--arch); background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, .22) 45%, transparent 60%); background-size: 250% 100%; background-position: 120% 0; mix-blend-mode: screen; }
 .coin__edge { position: absolute; inset: 0; transform-style: preserve-3d; }
 .coin__edge i { position: absolute; inset: 0; border-radius: var(--arch); background: linear-gradient(160deg, #d99a35, #8c5f1a); transform: translateZ(calc(var(--z) * var(--depth, 1px))); }
 .coin__shadow { position: absolute; left: 14%; right: 14%; bottom: -14%; height: 9%; border-radius: 50%; background: radial-gradient(closest-side, rgba(23, 58, 38, .45), transparent); animation: shadow 5s ease-in-out infinite; transform: translateZ(-60px); }
-@keyframes float { 50% { transform: translateY(-14px); } }
+@keyframes float { 50% { transform: translateY(-5px); } }
 @keyframes shadow { 50% { transform: translateZ(-60px) scale(.82); opacity: .6; } }
-@keyframes shine { 0%, 45% { background-position: 120% 0; } 75%, 100% { background-position: -120% 0; } }
 .sticker { position: absolute; right: -9%; bottom: -5%; width: 27%; aspect-ratio: 1; border-radius: 50%; background: var(--terra); color: var(--cream); display: grid; place-content: center; text-align: center; font-size: clamp(.6rem, 1.6vw, .78rem); letter-spacing: .12em; text-transform: uppercase; line-height: 1.25; transform: rotate(-12deg); box-shadow: 0 0 0 5px var(--cream), 0 14px 30px -12px rgba(0, 0, 0, .4); }
 .sticker b { font: italic 600 1.9em var(--serif); letter-spacing: 0; text-transform: none; }
 @keyframes spin { to { transform: rotate(360deg); } }

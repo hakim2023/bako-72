@@ -42,31 +42,26 @@ if (edge) {
 const coinBody = document.querySelector('.coin__body')
 if (coinBody) {
   const gentle = matchMedia('(prefers-reduced-motion: reduce)').matches
-  const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2)
-  const lerp = (a, b, k) => a + (b - a) * ease(k)
   const tilt = { x: 0, y: 0, tx: 0, ty: 0 }
 
-  // idle pose at time t (seconds): sway, then a full turn, then settle
-  const pose = (t) => {
-    if (gentle) return { y: Math.sin(t * 0.6) * 30, x: 8 + Math.sin(t * 0.45) * 5 }
-    const p = (t % 8) / 8
-    if (p < 0.35) return { y: lerp(-32, 32, p / 0.35), x: lerp(8, -6, p / 0.35) }
-    if (p < 0.7) return { y: lerp(32, 392, (p - 0.35) / 0.35), x: lerp(-6, 8, (p - 0.35) / 0.35) }
-    return { y: lerp(392, 328, (p - 0.7) / 0.3), x: 8 }
-  }
+  // idle pose at time t (seconds): a slow, small sway that keeps the 3D edge visible without distracting
+  const pose = (t) => ({
+    y: -14 + Math.sin(t * (gentle ? 0.25 : 0.4)) * 10,
+    x: 6 + Math.sin(t * 0.3) * 3,
+  })
 
   // desktop: follow the pointer
   if (matchMedia('(hover: hover)').matches) {
     addEventListener('pointermove', (e) => {
-      tilt.ty = ((e.clientX / innerWidth) - 0.5) * 28
-      tilt.tx = -((e.clientY / innerHeight) - 0.5) * 20
+      tilt.ty = ((e.clientX / innerWidth) - 0.5) * 12
+      tilt.tx = -((e.clientY / innerHeight) - 0.5) * 8
     }, { passive: true })
   }
   // phones: follow the device tilt (gyroscope)
   addEventListener('deviceorientation', (e) => {
     if (e.gamma == null || e.beta == null) return
-    tilt.ty = Math.max(-30, Math.min(30, e.gamma)) * 0.9
-    tilt.tx = Math.max(-25, Math.min(25, e.beta - 45)) * -0.6
+    tilt.ty = Math.max(-30, Math.min(30, e.gamma)) * 0.3
+    tilt.tx = Math.max(-25, Math.min(25, e.beta - 45)) * -0.2
   }, { passive: true })
 
   let visible = true
@@ -76,8 +71,8 @@ if (coinBody) {
   const frame = (now) => {
     requestAnimationFrame(frame)
     if (!visible || document.hidden) return
-    tilt.x += (tilt.tx - tilt.x) * 0.08
-    tilt.y += (tilt.ty - tilt.y) * 0.08
+    tilt.x += (tilt.tx - tilt.x) * 0.04
+    tilt.y += (tilt.ty - tilt.y) * 0.04
     const p = pose((now - start) / 1000)
     coinBody.style.transform = `rotateX(${(p.x + tilt.x).toFixed(2)}deg) rotateY(${(p.y + tilt.y).toFixed(2)}deg)`
   }
