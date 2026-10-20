@@ -37,15 +37,51 @@ if (edge) {
   edge.innerHTML = Array.from({ length: layers }, (_, i) => `<i style="--z:${i - (layers - 1) / 2}"></i>`).join('')
 }
 
-// medallion follows the pointer slightly (desktop) on top of its idle animation
-const coin = document.getElementById('coin')
-if (coin && matchMedia('(hover: hover)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  addEventListener('pointermove', (e) => {
-    const x = (e.clientX / innerWidth - 0.5) * 2
-    const y = (e.clientY / innerHeight - 0.5) * 2
-    coin.style.setProperty('--tx', `${(-y * 10).toFixed(2)}deg`)
-    coin.style.setProperty('--ty', `${(x * 14).toFixed(2)}deg`)
-  })
+// 3D medallion motion, driven by JS so it runs on every phone
+// (CSS animations get switched off by "remove animations" / power-saving modes).
+const coinBody = document.querySelector('.coin__body')
+if (coinBody) {
+  const gentle = matchMedia('(prefers-reduced-motion: reduce)').matches
+  const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2)
+  const lerp = (a, b, k) => a + (b - a) * ease(k)
+  const tilt = { x: 0, y: 0, tx: 0, ty: 0 }
+
+  // idle pose at time t (seconds): sway, then a full turn, then settle
+  const pose = (t) => {
+    if (gentle) return { y: Math.sin(t * 0.6) * 30, x: 8 + Math.sin(t * 0.45) * 5 }
+    const p = (t % 8) / 8
+    if (p < 0.35) return { y: lerp(-32, 32, p / 0.35), x: lerp(8, -6, p / 0.35) }
+    if (p < 0.7) return { y: lerp(32, 392, (p - 0.35) / 0.35), x: lerp(-6, 8, (p - 0.35) / 0.35) }
+    return { y: lerp(392, 328, (p - 0.7) / 0.3), x: 8 }
+  }
+
+  // desktop: follow the pointer
+  if (matchMedia('(hover: hover)').matches) {
+    addEventListener('pointermove', (e) => {
+      tilt.ty = ((e.clientX / innerWidth) - 0.5) * 28
+      tilt.tx = -((e.clientY / innerHeight) - 0.5) * 20
+    }, { passive: true })
+  }
+  // phones: follow the device tilt (gyroscope)
+  addEventListener('deviceorientation', (e) => {
+    if (e.gamma == null || e.beta == null) return
+    tilt.ty = Math.max(-30, Math.min(30, e.gamma)) * 0.9
+    tilt.tx = Math.max(-25, Math.min(25, e.beta - 45)) * -0.6
+  }, { passive: true })
+
+  let visible = true
+  new IntersectionObserver(([en]) => (visible = en.isIntersecting)).observe(coinBody)
+
+  const start = performance.now()
+  const frame = (now) => {
+    requestAnimationFrame(frame)
+    if (!visible || document.hidden) return
+    tilt.x += (tilt.tx - tilt.x) * 0.08
+    tilt.y += (tilt.ty - tilt.y) * 0.08
+    const p = pose((now - start) / 1000)
+    coinBody.style.transform = `rotateX(${(p.x + tilt.x).toFixed(2)}deg) rotateY(${(p.y + tilt.y).toFixed(2)}deg)`
+  }
+  requestAnimationFrame(frame)
 }
 
 // mobile menu
