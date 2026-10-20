@@ -51,6 +51,10 @@ em { font-style: italic; font-weight: 400; color: var(--terra); }
 .header { position: sticky; top: 0; z-index: 40; background: rgba(248, 241, 228, .92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
 .header__in { display: flex; align-items: center; gap: 2rem; min-height: 72px; }
 .logo { display: grid; line-height: 1; margin-right: auto; }
+.logo--mark { display: flex; align-items: center; gap: .65rem; }
+.logo--mark img { width: 46px; height: 46px; border-radius: 50%; box-shadow: 0 4px 12px -4px rgba(23, 58, 38, .5); }
+.logo__txt { display: grid; }
+.logo--mark .logo__sub { padding-left: 1.6rem; }
 .logo__name { font: 800 1.55rem var(--sans); letter-spacing: -.02em; color: var(--green); }
 .logo__sub { font: italic 400 1.05rem var(--serif); color: var(--ochre); margin-top: -2px; padding-left: 2.2rem; }
 .logo--light .logo__name { color: var(--cream); }
@@ -84,15 +88,33 @@ em { font-style: italic; font-weight: 400; color: var(--terra); }
 .modes li { padding: .45rem 1rem; border-radius: 999px; background: var(--cream-2); font-size: .9rem; }
 .modes b { font-weight: 600; color: var(--green); }
 
-.hero__art { position: relative; justify-self: center; width: min(440px, 88vw); aspect-ratio: 1; }
-.plate { position: absolute; inset: 0; border-radius: 50%; background: var(--pattern); background-size: 48px 24px; padding: 6%; box-shadow: 0 40px 70px -30px rgba(23, 58, 38, .6); animation: spin 80s linear infinite; }
-.plate__ring { position: absolute; inset: 6%; border-radius: 50%; background: var(--cream); }
-.plate__inner { position: absolute; inset: 13%; border-radius: 50%; background: var(--green); color: var(--cream); display: grid; place-content: center; justify-items: center; text-align: center; gap: .35rem; box-shadow: inset 0 0 0 10px var(--green-2); animation: spin 80s linear infinite reverse; }
-.plate__tag { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ochre); }
-.plate__inner strong { font: italic 500 clamp(3rem, 9vw, 4.4rem)/1 var(--serif); }
-.plate__desc { font-size: .9rem; opacity: .8; }
-.plate__price { margin-top: .5rem; padding: .3rem .9rem; border-radius: 999px; background: var(--ochre); color: var(--green); font-weight: 600; }
-.sticker { position: absolute; right: -2%; bottom: 4%; width: 31%; aspect-ratio: 1; border-radius: 50%; background: var(--terra); color: var(--cream); display: grid; place-content: center; text-align: center; font-size: clamp(.6rem, 1.6vw, .78rem); letter-spacing: .12em; text-transform: uppercase; line-height: 1.25; transform: rotate(-12deg); box-shadow: 0 0 0 5px var(--cream), 0 14px 30px -12px rgba(0, 0, 0, .4); }
+.hero__art { position: relative; justify-self: center; width: min(420px, 82vw); aspect-ratio: 1; perspective: 1100px; }
+/* wax-print halo behind the medallion */
+.hero__art::before { content: ''; position: absolute; inset: 4%; border-radius: 50%; background: var(--pattern); background-size: 40px 20px; opacity: .14; transform: scale(1.12); animation: spin 90s linear infinite; }
+
+/* 3D medallion */
+.coin { position: absolute; inset: 8%; transform-style: preserve-3d; transform: rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg)); transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
+.coin__float { position: absolute; inset: 0; transform-style: preserve-3d; animation: float 5s ease-in-out infinite; }
+.coin__body { position: absolute; inset: 0; transform-style: preserve-3d; animation: coin 9s cubic-bezier(.65, 0, .35, 1) infinite; }
+.coin__face { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.coin__face img { width: 100%; height: 100%; display: block; }
+.coin__face--front { transform: translateZ(9.5px); }
+.coin__face--back { transform: rotateY(180deg) translateZ(9.5px); }
+/* glossy light sweep */
+.coin__face::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, .22) 45%, transparent 60%); background-size: 250% 100%; animation: shine 9s ease-in-out infinite; mix-blend-mode: screen; }
+.coin__edge { position: absolute; inset: 0; transform-style: preserve-3d; }
+.coin__edge i { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle, #8c5f1a 60%, #c98a2a 68%, #a7731f 100%); transform: translateZ(calc(var(--z) * 1px)); }
+.coin__shadow { position: absolute; left: 14%; right: 14%; bottom: -14%; height: 9%; border-radius: 50%; background: radial-gradient(closest-side, rgba(23, 58, 38, .45), transparent); animation: shadow 5s ease-in-out infinite; transform: translateZ(-60px); }
+@keyframes coin {
+  0% { transform: rotateY(-24deg) rotateX(6deg); }
+  40% { transform: rotateY(24deg) rotateX(-4deg); }
+  72% { transform: rotateY(384deg) rotateX(6deg); }
+  100% { transform: rotateY(336deg) rotateX(6deg); }
+}
+@keyframes float { 50% { transform: translateY(-14px); } }
+@keyframes shadow { 50% { transform: translateZ(-60px) scale(.82); opacity: .6; } }
+@keyframes shine { 0%, 45% { background-position: 120% 0; } 75%, 100% { background-position: -120% 0; } }
+.sticker { position: absolute; right: -9%; bottom: -5%; width: 27%; aspect-ratio: 1; border-radius: 50%; background: var(--terra); color: var(--cream); display: grid; place-content: center; text-align: center; font-size: clamp(.6rem, 1.6vw, .78rem); letter-spacing: .12em; text-transform: uppercase; line-height: 1.25; transform: rotate(-12deg); box-shadow: 0 0 0 5px var(--cream), 0 14px 30px -12px rgba(0, 0, 0, .4); }
 .sticker b { font: italic 600 1.9em var(--serif); letter-spacing: 0; text-transform: none; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (min-width: 920px) { .hero__in { grid-template-columns: 1.15fr 1fr; } }
@@ -173,4 +195,4 @@ em { font-style: italic; font-weight: 400; color: var(--terra); }
 .mobilebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; padding: .7rem 1rem calc(.7rem + env(safe-area-inset-bottom)); background: rgba(23, 58, 38, .97); }
 @media (min-width: 881px) { .mobilebar { display: none; } }
 
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .plate, .plate__inner { animation: none; } * { transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .hero__art::before, .coin__float, .coin__body, .coin__face::after, .coin__shadow { animation: none; } * { transition: none !important; } }

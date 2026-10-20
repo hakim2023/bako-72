@@ -7,6 +7,7 @@
   <meta name="description" content="Bako-72, restaurant familial de cuisine africaine traditionnelle faite maison, sans alcool, à Saint-Denis. Thièb, maffé, yassa, attiéké, poisson braisé. Sur place, à emporter et en livraison." />
   <meta name="theme-color" content="#173a26" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="logo.svg" />
   <meta property="og:type" content="restaurant" />
   <meta property="og:title" content="Bako-72 — Cuisine africaine faite maison" />
   <meta property="og:description" content="Restaurant familial sans alcool à Saint-Denis. Sur place, à emporter, livraison. Ouvert 7j/7." />
@@ -36,9 +37,9 @@
 
   <header class="header" id="header">
     <div class="wrap header__in">
-      <a href="#accueil" class="logo" aria-label="Bako-72, accueil">
-        <span class="logo__name">BAKO-72</span>
-        <span class="logo__sub">Restaurant</span>
+      <a href="#accueil" class="logo logo--mark" aria-label="Bako-72, accueil">
+        <img src="logo.svg" width="46" height="46" alt="" />
+        <span class="logo__txt"><span class="logo__name">BAKO-72</span><span class="logo__sub">Restaurant</span></span>
       </a>
       <nav class="nav" id="nav" aria-label="Navigation principale">
         <a href="#carte">La carte</a>
@@ -70,15 +71,17 @@
           </ul>
         </div>
 
+        <!-- 3D medallion logo: two faces + stacked edge layers, rotated with CSS 3D -->
         <div class="hero__art" aria-hidden="true">
-          <div class="plate">
-            <div class="plate__ring"></div>
-            <div class="plate__inner">
-              <span class="plate__tag">Plat signature</span>
-              <strong>Thièb</strong>
-              <span class="plate__desc">Riz cassé, légumes,<br />poulet ou bœuf</span>
-              <span class="plate__price">12 €</span>
+          <div class="coin" id="coin">
+            <div class="coin__float">
+              <div class="coin__body">
+                <div class="coin__face coin__face--front"><img src="logo.svg" alt="" /></div>
+                <div class="coin__edge" id="coinEdge"></div>
+                <div class="coin__face coin__face--back"><img src="logo.svg" alt="" /></div>
+              </div>
             </div>
+            <div class="coin__shadow"></div>
           </div>
           <div class="sticker">Authentic<br /><b>African</b><br />Cuisine</div>
         </div>
@@ -92,7 +95,7 @@
       <div class="wrap highlights__in">
         <div><b>100%</b><span>fait maison</span></div>
         <div><b>7j/7</b><span>ouvert toute la semaine</span></div>
-        <div><b>12 €</b><span>le plat, à partir de</span></div>
+        <div><b>10 €</b><span>le plat, à partir de</span></div>
         <div><b>0</b><span>alcool : restaurant familial</span></div>
       </div>
     </section>

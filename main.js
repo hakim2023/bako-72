@@ -16,7 +16,7 @@ list.innerHTML = menu
         .map(
           (it) => `<li class="dish">
             <div class="dish__top"><h4>${it.name}${it.tag ? ` <span class="dish__tag">${it.tag}</span>` : ''}</h4><i></i><span class="dish__price">${window.formatPrice(it.price)}</span></div>
-            <p>${it.desc}</p></li>`,
+            ${it.desc ? `<p>${it.desc}</p>` : ''}</li>`,
         )
         .join('')}</ul></section>`,
   )
@@ -29,6 +29,24 @@ tabs.addEventListener('click', (e) => {
   const cat = btn.dataset.cat
   list.querySelectorAll('.menu__cat').forEach((s) => (s.hidden = cat !== 'all' && s.dataset.cat !== cat))
 })
+
+// 3D medallion: build the coin's thickness from stacked discs
+const edge = document.getElementById('coinEdge')
+if (edge) {
+  const layers = 18
+  edge.innerHTML = Array.from({ length: layers }, (_, i) => `<i style="--z:${i - (layers - 1) / 2}"></i>`).join('')
+}
+
+// medallion follows the pointer slightly (desktop) on top of its idle animation
+const coin = document.getElementById('coin')
+if (coin && matchMedia('(hover: hover)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  addEventListener('pointermove', (e) => {
+    const x = (e.clientX / innerWidth - 0.5) * 2
+    const y = (e.clientY / innerHeight - 0.5) * 2
+    coin.style.setProperty('--tx', `${(-y * 10).toFixed(2)}deg`)
+    coin.style.setProperty('--ty', `${(x * 14).toFixed(2)}deg`)
+  })
+}
 
 // mobile menu
 const burger = document.getElementById('burger')

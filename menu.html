@@ -120,7 +120,7 @@
   <script>
     const { menu } = window.BAKO
     const cat = (c) => `<section class="cat"><h2>${c.title}<span>${c.subtitle}</span></h2>${c.items
-      .map((it) => `<div class="dish"><div class="row"><b>${it.name}${it.tag ? `<span class="tag">${it.tag}</span>` : ''}</b><i></i><em>${window.formatPrice(it.price)}</em></div><p>${it.desc}</p></div>`)
+      .map((it) => `<div class="dish"><div class="row"><b>${it.name}${it.tag ? `<span class="tag">${it.tag}</span>` : ''}</b><i></i><em>${window.formatPrice(it.price)}</em></div>${it.desc ? `<p>${it.desc}</p>` : ''}</div>`)
       .join('')}</section>`
     document.getElementById('colA').innerHTML = cat(menu[0]) +
       `<aside class="promise"><span>✦</span><p>Tous nos plats sont préparés chaque jour dans notre cuisine, avec des produits frais.</p><b>Restaurant familial · Sans alcool</b></aside>`
