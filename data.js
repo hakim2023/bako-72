@@ -7,7 +7,7 @@ window.BAKO = {
     { label: '09 80 83 03 14', tel: '+33980830314' },
   ],
   address: '6 rue Gaston Philipe, 93200 Saint-Denis',
-  url: 'https://hakim2023.github.io/bako-72/',
+  url: 'https://bako-72.netlify.app/',
   menu: [
     {
       id: 'mijotes',
