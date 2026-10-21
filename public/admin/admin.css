@@ -1,0 +1,87 @@
+:root {
+  --green: #173a26; --green-2: #22503a; --cream: #f8f1e4; --cream-2: #efe2c9; --paper: #fffaf1;
+  --ochre: #e3a13b; --terra: #c4512b; --ink: #1f1b16; --muted: #6d6458; --line: rgba(31, 27, 22, .14);
+  --sans: 'DM Sans', system-ui, sans-serif; --serif: 'Fraunces', Georgia, serif;
+}
+* { box-sizing: border-box; margin: 0; }
+body { background: var(--cream); color: var(--ink); font: 400 16px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
+[hidden] { display: none !important; }
+button, input, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--ochre); outline-offset: 2px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 1.4rem; border-radius: 999px; border: 1.5px solid transparent; font-weight: 600; cursor: pointer; }
+.btn:disabled { opacity: .5; cursor: default; }
+.btn--green { background: var(--green); color: var(--cream); }
+.btn--line { background: transparent; border-color: var(--green); color: var(--green); }
+.btn--block { width: 100%; }
+
+/* login */
+.login { min-height: 100svh; display: grid; place-items: center; padding: 1.25rem; }
+.login__card { width: min(380px, 100%); background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 2rem 1.6rem; display: grid; gap: 1rem; text-align: center; box-shadow: 0 30px 60px -30px rgba(23, 58, 38, .35); }
+.login__card img { margin: 0 auto; }
+.login__card h1 { font: 600 1.6rem var(--serif); color: var(--green); }
+.login__card p { color: var(--muted); font-size: .95rem; }
+.login__card label { display: grid; gap: .4rem; text-align: left; font-weight: 600; font-size: .9rem; }
+.error { color: var(--terra); min-height: 1.4em; font-weight: 600; }
+
+input[type='text'], input[type='password'], input[type='number'], textarea {
+  width: 100%; min-height: 46px; padding: .6rem .8rem; border: 1.5px solid var(--line); border-radius: 12px; background: #fff; font-size: 16px;
+}
+textarea { min-height: 70px; resize: vertical; line-height: 1.4; }
+input:focus, textarea:focus { outline: 0; border-color: var(--green); }
+
+/* app */
+.top { position: sticky; top: 0; z-index: 20; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .7rem 1rem; background: var(--green); color: var(--cream); }
+.top__brand { display: flex; align-items: center; gap: .6rem; }
+.top__brand b { font: 600 1.05rem var(--serif); }
+.top__links { display: flex; gap: .4rem; align-items: center; font-size: .9rem; }
+.top__links a, .top__links button { color: var(--cream); background: rgba(248, 241, 228, .1); border: 0; padding: .5rem .8rem; border-radius: 999px; text-decoration: none; cursor: pointer; white-space: nowrap; }
+@media (max-width: 480px) { .top__brand b { display: none; } }
+
+.wrap { width: min(860px, 100%); margin: 0 auto; padding: 1.2rem 1rem 7rem; display: grid; gap: 1.2rem; }
+.help { background: var(--cream-2); border-radius: 16px; padding: 1rem 1.2rem; }
+.help h2 { font: 600 1.1rem var(--serif); color: var(--green); margin-bottom: .3rem; }
+.help p { font-size: .95rem; color: #4a433a; }
+
+.cat { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+.cat__head { display: grid; gap: .6rem; padding: 1rem; background: #f3e8d3; border-bottom: 2px solid var(--green); }
+.cat__head .row { display: flex; gap: .5rem; align-items: center; }
+.cat__title { font: 600 1.15rem var(--serif) !important; }
+.cat__items { display: grid; }
+.cat__foot { padding: .8rem 1rem 1rem; }
+
+.dish { display: grid; gap: .55rem; padding: 1rem; border-bottom: 1px dashed var(--line); }
+.dish--out { background: #fbefe9; }
+.dish__row { display: grid; grid-template-columns: 1fr 110px; gap: .5rem; }
+.price { position: relative; }
+.price input { padding-right: 1.8rem; text-align: right; }
+.price span { position: absolute; right: .8rem; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.dish__tools { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; justify-content: space-between; }
+.soldout { display: inline-flex; align-items: center; gap: .55rem; font-weight: 600; font-size: .95rem; cursor: pointer; padding: .3rem 0; }
+.soldout input { width: 22px; height: 22px; accent-color: var(--terra); }
+.icons { display: flex; gap: .35rem; }
+.icon { width: 42px; height: 42px; border-radius: 10px; border: 1.5px solid var(--line); background: #fff; cursor: pointer; font-size: 1rem; }
+.icon:disabled { opacity: .3; cursor: default; }
+.icon--danger { color: var(--terra); border-color: rgba(196, 81, 43, .35); }
+.label { font-size: .78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+
+.savebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .8rem 1rem calc(.8rem + env(safe-area-inset-bottom)); background: rgba(255, 250, 241, .97); border-top: 1px solid var(--line); box-shadow: 0 -10px 30px -20px rgba(0, 0, 0, .3); }
+.savebar__status { font-size: .9rem; color: var(--muted); }
+.savebar__status.is-dirty { color: var(--terra); font-weight: 600; }
+.savebar .btn { min-width: 150px; }
+
+.toast { position: fixed; left: 50%; bottom: 90px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; padding: .8rem 1.2rem; border-radius: 12px; background: var(--green); color: var(--cream); font-weight: 600; transition: all .3s; max-width: calc(100% - 2rem); text-align: center; }
+.toast.is-on { opacity: 1; transform: translate(-50%, 0); }
+.toast.is-error { background: var(--terra); }
+
+/* change password */
+.pwbox { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 1rem 1.2rem; }
+.pwbox summary { cursor: pointer; font-weight: 600; color: var(--green); }
+.pwbox form { display: grid; gap: .8rem; margin-top: 1rem; }
+.pwbox label { display: grid; gap: .35rem; font-weight: 600; font-size: .9rem; }
+
+/* save bar sits under the header (the bottom-right corner is taken by Netlify's badge) */
+.savebar { position: sticky; top: 56px; bottom: auto; z-index: 15; border-top: 0; border-bottom: 1px solid var(--line); box-shadow: 0 10px 30px -22px rgba(0, 0, 0, .35); padding: .7rem 1rem; }
+.wrap { padding-bottom: 6rem; }
+.toast { top: 130px; bottom: auto; transform: translate(-50%, -20px); }
+.toast.is-on { transform: translate(-50%, 0); }

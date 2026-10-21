@@ -1,26 +1,34 @@
-const { menu } = window.BAKO
 const tabs = document.getElementById('tabs')
 const list = document.getElementById('menu')
+const esc = window.escapeHtml
 
-// tabs: "Tout" + one per category
-const cats = [{ id: 'all', title: 'Tout' }, ...menu]
-tabs.innerHTML = cats
-  .map((c, i) => `<button role="tab" aria-selected="${i === 0}" data-cat="${c.id}">${c.title}</button>`)
-  .join('')
+function renderMenu(menu) {
+  // tabs: "Tout" + one per category
+  const cats = [{ id: 'all', title: 'Tout' }, ...menu]
+  tabs.innerHTML = cats
+    .map((c, i) => `<button role="tab" aria-selected="${i === 0}" data-cat="${esc(c.id)}">${esc(c.title)}</button>`)
+    .join('')
 
-list.innerHTML = menu
-  .map(
-    (cat) => `<section class="menu__cat" data-cat="${cat.id}">
-      <header><h3>${cat.title}</h3><p>${cat.subtitle}</p></header>
+  list.innerHTML = menu
+    .map(
+      (cat) => `<section class="menu__cat" data-cat="${esc(cat.id)}">
+      <header><h3>${esc(cat.title)}</h3>${cat.subtitle ? `<p>${esc(cat.subtitle)}</p>` : ''}</header>
       <ul>${cat.items
         .map(
-          (it) => `<li class="dish">
-            <div class="dish__top"><h4>${it.name}${it.tag ? ` <span class="dish__tag">${it.tag}</span>` : ''}</h4><i></i><span class="dish__price">${window.formatPrice(it.price)}</span></div>
-            ${it.desc ? `<p>${it.desc}</p>` : ''}</li>`,
+          (it) => `<li class="dish${it.soldOut ? ' dish--out' : ''}">
+            <div class="dish__top"><h4>${esc(it.name)}${it.soldOut ? ' <span class="dish__tag dish__tag--out">Épuisé</span>' : ''}</h4><i></i><span class="dish__price">${window.formatPrice(it.price)}</span></div>
+            ${it.desc ? `<p>${esc(it.desc)}</p>` : ''}</li>`,
         )
         .join('')}</ul></section>`,
-  )
-  .join('')
+    )
+    .join('')
+}
+
+renderMenu(window.BAKO.menu)
+// swap in the live menu from the admin as soon as it arrives
+window.loadMenu().then((menu) => {
+  if (menu !== window.BAKO.menu) renderMenu(menu)
+})
 
 tabs.addEventListener('click', (e) => {
   const btn = e.target.closest('button')

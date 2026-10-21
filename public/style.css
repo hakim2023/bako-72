@@ -222,3 +222,13 @@ em { font-style: italic; font-weight: 400; color: var(--terra); }
 @media (min-width: 881px) { .mobilebar { display: none; } }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .hero__art::before, .coin__float, .coin__face::after, .coin__shadow { animation: none; } * { transition: none !important; } }
+
+/* dish marked "épuisé" (sold out) from the admin */
+.dish--out h4, .dish--out .dish__price, .dish--out p { opacity: .5; }
+.dish--out .dish__price { text-decoration: line-through; }
+.dish__tag--out { background: var(--terra); color: var(--cream); opacity: 1; }
+
+/* Netlify's free plan shows a "Powered by Netlify" badge in the bottom-right corner:
+   keep the call/menu buttons clear of it */
+.mobilebar { grid-template-columns: 1fr; padding-right: calc(1rem + 186px); }
+.mobilebar .btn--cream { display: none; }

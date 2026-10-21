@@ -1,0 +1,9 @@
+{
+  "name": "bako-72",
+  "private": true,
+  "type": "module",
+  "description": "Bako-72 restaurant website with a menu admin (Netlify Functions + Netlify Blobs)",
+  "dependencies": {
+    "@netlify/blobs": "^11.1.5"
+  }
+}

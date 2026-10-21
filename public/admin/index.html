@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Bako-72 — Gestion de la carte</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <!-- ===== Connexion ===== -->
+  <main class="login" id="login">
+    <form class="login__card" id="loginForm">
+      <img src="../logo.svg" alt="" width="84" height="84" />
+      <h1>Gestion de la carte</h1>
+      <p>Espace réservé au restaurant Bako-72.</p>
+      <label>Mot de passe
+        <input type="password" id="password" autocomplete="current-password" required />
+      </label>
+      <button class="btn btn--green" type="submit">Se connecter</button>
+      <p class="error" id="loginError" role="alert"></p>
+    </form>
+  </main>
+
+  <!-- ===== Éditeur ===== -->
+  <div class="app" id="app" hidden>
+    <header class="top">
+      <div class="top__brand"><img src="../logo.svg" alt="" width="36" height="36" /><b>Gestion de la carte</b></div>
+      <div class="top__links">
+        <a href="../" target="_blank" rel="noopener">Voir le site ↗</a>
+        <button type="button" id="logout">Déconnexion</button>
+      </div>
+    </header>
+    <div class="savebar">
+      <span class="savebar__status" id="status">Chargement…</span>
+      <button type="button" class="btn btn--green" id="save" disabled>Enregistrer</button>
+    </div>
+
+    <div class="wrap">
+      <section class="help">
+        <h2>Comment ça marche</h2>
+        <p>Modifiez les noms, prix et ingrédients, cochez <b>Épuisé</b> pour un plat indisponible aujourd'hui, puis appuyez sur <b>Enregistrer</b>. Le site est mis à jour immédiatement.</p>
+      </section>
+
+      <div id="cats"></div>
+
+      <button type="button" class="btn btn--line btn--block" id="addCat">+ Ajouter une catégorie</button>
+
+      <details class="pwbox">
+        <summary>Changer le mot de passe</summary>
+        <form id="pwForm">
+          <label>Mot de passe actuel<input type="password" id="pwCurrent" autocomplete="current-password" required /></label>
+          <label>Nouveau mot de passe (10 caractères minimum)<input type="password" id="pwNext" autocomplete="new-password" minlength="10" required /></label>
+          <label>Confirmer le nouveau mot de passe<input type="password" id="pwConfirm" autocomplete="new-password" minlength="10" required /></label>
+          <button class="btn btn--green" type="submit">Changer le mot de passe</button>
+          <p class="error" id="pwError" role="alert"></p>
+        </form>
+      </details>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="../data.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

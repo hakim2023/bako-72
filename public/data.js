@@ -62,3 +62,25 @@ window.BAKO = {
 }
 
 window.formatPrice = (p) => (Number.isInteger(p) ? `${p}` : p.toFixed(2).replace('.', ',')) + ' €'
+
+// Text typed in the admin is shown as text, never as HTML.
+window.escapeHtml = (s) =>
+  String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
+
+// Live menu saved from /admin. Falls back to the built-in menu above if the API is
+// unreachable (e.g. the GitHub Pages copy, or a network problem).
+window.loadMenu = async () => {
+  try {
+    const ctrl = new AbortController()
+    const timer = setTimeout(() => ctrl.abort(), 3000)
+    const res = await fetch('/api/menu', { signal: ctrl.signal, cache: 'no-store' })
+    clearTimeout(timer)
+    if (res.ok) {
+      const data = await res.json()
+      if (Array.isArray(data.menu) && data.menu.length) return data.menu
+    }
+  } catch {
+    /* use built-in menu */
+  }
+  return window.BAKO.menu
+}
